@@ -23,3 +23,5 @@ pnpm-debug.log*
 *.sw?
 
 packages/**/bin/
+
+/data
