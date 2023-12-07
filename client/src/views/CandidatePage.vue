@@ -20,7 +20,9 @@
     </div>
 
     <div class="flex justify-end p-4">
-      <button class="rounded text-xs font-semibold">Bagikan</button>
+      <button class="rounded text-xs font-semibold" @click="handleShare">
+        Bagikan
+      </button>
     </div>
   </div>
   <div class="grid grid-cols-2">
@@ -127,6 +129,25 @@ const program = computed(() => {
 
   return text
 })
+
+const handleShare = () => {
+  let shareData = {
+    title: "GoodTalk & Action!",
+    text: `Cek profil ${name.value} di GoodTalk & Action sekarang! Cari tahu siapa dia dan apa programnya!`,
+    url: window.location.href,
+  }
+
+  if (navigator.share) {
+    navigator
+      .share(shareData)
+      .then(() => {
+        console.log("Thanks for sharing!")
+      })
+      .catch(console.error)
+  } else {
+    console.log("Web Share API not supported in your browser")
+  }
+}
 </script>
 
 <style lang="scss" scoped></style>
