@@ -10,7 +10,7 @@
           <span class="w-12 h-2 rounded-full bg-[#3F4242] block"></span>
         </button>
       </div>
-      <SearchBar />
+      <SearchBar @search="updateQuery"/>
       <CandidateSlider :candidates="candidates" />
     </div>
   </div>
@@ -36,6 +36,10 @@ const candidates = ref([])
 onMounted(async () => {
   candidates.value = await getCandidates()
 })
+
+const updateQuery = async(query) => {
+  candidates.value = await getCandidates(query)
+}
 </script>
 
 <style lang="scss" scoped></style>

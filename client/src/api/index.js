@@ -1,6 +1,6 @@
-export const getCandidates = async () => {
-  //const URL = "http://localhost:3000/api/leaders?q="
-  const URL = "/api/leaders?q="
+export const getCandidates = async (query = '') => {
+  //const URL = `http://localhost:3000/api/leaders?q=${query}`
+  const URL = `/api/leaders?q=${query}`
 
   const response = await fetch(URL)
 
