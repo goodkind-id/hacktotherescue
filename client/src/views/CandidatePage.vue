@@ -81,6 +81,15 @@
       </div>
     </div>
   </div>
+
+  <div class="p-4 flex flex-col gap-6">
+    <div class="flex flex-col gap-2">
+      <h4 class="text-xs text-gray-500">Program</h4>
+      <p class="text-base whitespace-pre-line">
+        {{ program }}
+      </p>
+    </div>
+  </div>
 </template>
 
 <script setup>
@@ -92,7 +101,10 @@ const route = useRoute()
 
 const candidate = computed(() => {
   return candidates.find((candidate) => {
-    return candidate?.NAMA_LENGKAP?.toLowerCase().replace(/\s/g, "-") === route.params.name
+    return (
+      candidate?.NAMA_LENGKAP?.toLowerCase().replace(/\s/g, "-") ===
+      route.params.name
+    )
   })
 })
 
@@ -106,6 +118,14 @@ const picUrl = computed(() => {
 
 const name = computed(() => {
   return candidate.value?.NAMA_LENGKAP
+})
+
+const program = computed(() => {
+  let text = candidate.value?.PROGRAM_USULAN
+
+  text = text?.replace(/: $/, "")
+
+  return text
 })
 </script>
 
