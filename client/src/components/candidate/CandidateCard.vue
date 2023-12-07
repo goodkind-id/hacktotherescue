@@ -16,14 +16,14 @@
           {{ name }}
         </h5>
         <div class="flex flex-col gap-3 mt-auto">
-          <div class="flex items-center gap-1 text-gray-300">
+          <div class="flex items-center gap-1 text-gray-300" v-if="party">
             <img :src="party?.logoUrl" :alt="party" class="w-4 h-4 rounded" />
             <p class="text-xs line-clamp-1 break-all">
               {{ party.code }}
             </p>
           </div>
           <p
-            class="text-xs w-full text-center bg-[#353838] text-white py-1 px-2 rounded"
+            class="text-xs w-full text-center bg-[#353838] text-white py-1 px-2 rounded break-all line-clamp-1"
           >
             {{ dapil }}
           </p>
@@ -54,7 +54,7 @@ const picUrl = computed(() => {
 })
 
 const name = computed(() => {
-  return props.candidate?.NAMA_LENGKAP
+  return props.candidate?.name
 })
 
 const party = computed(() => {
@@ -66,7 +66,7 @@ const party = computed(() => {
 })
 
 const dapil = computed(() => {
-  return props.candidate?.DAPIL
+  return props.candidate?.DAPIL?.replace("KEPULAUAN", "KEP.")
 })
 
 const slug = computed(() => {

@@ -2,7 +2,7 @@
   <div>
     <Swiper
       :modules="[Pagination, Navigation, Autoplay, EffectFade, EffectCoverflow]"
-      :slides-per-view="2.6"
+      :slides-per-view="2.4"
       :space-between="8"
       :slides-offset-before="16"
       :slides-offset-after="16"
