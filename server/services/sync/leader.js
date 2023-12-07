@@ -61,7 +61,7 @@ async function fetchLeaders () {
   const arrayFiles = []
   const arrayLeaders = []
 
-  const folderPath = 'data/JSON/caleg-info/dpd/results'
+  const folderPath = 'data/JSON/caleg-info/dpr-ri/results'
   const folderContent = await _fetchFolder(folderPath)
   folderContent.forEach(file => {
     arrayFiles.push(folderPath + '/' + file)
