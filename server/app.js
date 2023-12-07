@@ -6,6 +6,12 @@ const { fetchLeaders } = require('./services/sync/leader')
 
 app.use(express.json())
 
+const modules = [
+  require('./modules/leader')
+]
+
+modules.forEach(m => m.load(app))
+
 fetchLeaders()
 
 app.listen(port, () => {
