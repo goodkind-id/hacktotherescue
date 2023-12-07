@@ -70,8 +70,6 @@ async function _searchOrama (db, searchParams) {
 
 async function searchQuery (term = "", queryParams) {
   try {
-    let properties = ['name']
-
     // process query params
     let searchMessage = ''
     const genderQuery = queryParams?.gender
@@ -104,7 +102,6 @@ async function searchQuery (term = "", queryParams) {
     const searchParams = {
       term,
       threshold: thresholdQuery,
-      properties,
       where: whereParams,
       limit,
       offset,
