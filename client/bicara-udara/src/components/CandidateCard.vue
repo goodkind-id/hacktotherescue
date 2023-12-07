@@ -1,13 +1,11 @@
 <template>
-  <div class="bg-white rounded-lg h-full">  
+  <div class="bg-white rounded-lg h-full">
     <figure>
-      <img
-        :src="picUrl"
-        :alt="candidate.name"
-        class=""
-      />
-      <figcaption class="text-center p-2">
-        <div class="text-sm font-semibold">{{ name }}</div>
+      <img :src="picUrl" :alt="candidate.name" class="" />
+      <figcaption class="text-center p-2 flex flex-col gap-1">
+        <p class="text-sm font-semibold">{{ name }}</p>
+        <p class="text-xs text-gray-500">{{ party }}</p>
+        <p class="text-xs text-gray-500">{{ dapil }}</p>
       </figcaption>
     </figure>
   </div>
@@ -31,6 +29,14 @@ const picUrl = computed(() => {
 
 const name = computed(() => {
   return props.candidate?.NAMA_LENGKAP
+})
+
+const party = computed(() => {
+  return props.candidate?.PARTAI
+})
+
+const dapil = computed(() => {
+  return props.candidate?.DAPIL
 })
 </script>
 

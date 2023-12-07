@@ -1,16 +1,20 @@
 <template>
-  <Swiper
-    :slides-per-view="3"
-    :space-between="8"
-    :pagination="{ clickable: true }"
-    :navigation="true"
-    :autoplay="{ delay: 100 }"
-    :loop="true"
-  >
-    <SwiperSlide v-for="item in candidates" :key="item.NAMA_LENGKAP">
-      <CandidateCard :candidate="item" />
-    </SwiperSlide>
-  </Swiper>
+  <div>
+    <Swiper
+      :slides-per-view="3"
+      :space-between="8"
+      :slides-offset-before="8"
+      :slides-offset-after="8"
+      :pagination="{ clickable: true }"
+      :navigation="true"
+      :autoplay="{ delay: 100 }"
+      :loop="true"
+    >
+      <SwiperSlide v-for="item in candidates" :key="item.NAMA_LENGKAP">
+        <CandidateCard :candidate="item" />
+      </SwiperSlide>
+    </Swiper>
+  </div>
 </template>
 
 <script setup>
