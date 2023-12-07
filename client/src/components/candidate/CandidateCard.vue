@@ -1,12 +1,13 @@
 <template>
   <router-link
-    to="/"
+    :to="`/candidate/${slug}`"
     class="bg-white rounded-lg h-full overflow-hidden relative block"
   >
     <figure class="flex flex-col h-full">
       <img
         :src="picUrl"
-        :alt="candidate.name"
+        :alt="name"
+        loading="lazy"
         class="aspect-square object-cover w-full bg-gray-100 grow-0 rounded-lg"
       />
 
@@ -47,7 +48,7 @@ const picUrl = computed(() => {
 
   // return 'https://upload.wikimedia.org/wikipedia/commons/7/72/Default-welcomer.png'
 
-  return "https://thispersondoesnotexist.com"
+  return "https://thispersondoesnotexist.com?cachebust=" + Math.random()
 })
 
 const name = computed(() => {
@@ -64,6 +65,10 @@ const party = computed(() => {
 
 const dapil = computed(() => {
   return props.candidate?.DAPIL
+})
+
+const slug = computed(() => {
+  return props.candidate?.NAMA_LENGKAP?.toLowerCase().replace(/\s/g, "-")
 })
 </script>
 
