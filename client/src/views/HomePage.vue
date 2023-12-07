@@ -1,16 +1,27 @@
 <template>
-  <div class="flex flex-col gap-6 py-4">
-    <h1 class="text-3xl text-center font-bold">
-      GoodTalk & Action!
-    </h1>
+  <div class="flex flex-col gap-6 min-h-screen">
+    <Hero />
 
-    <SearchBar />
-    <CandidateSlider />
+    <div
+      class="bg-[#272929] pt-6 pb-20 sticky bottom-0 flex flex-col gap-6 mt-auto rounded-t-2xl"
+    >
+      <div class="flex items-center justify-center">
+        <button class="w-fit">
+          <span class="w-12 h-2 rounded-full bg-[#3F4242] block"></span>
+        </button>
+      </div>
+      <SearchBar />
+      <CandidateSlider :candidates="candidates" />
+    </div>
   </div>
 </template>
 
 <script setup>
-import { defineAsyncComponent } from "vue"
+import { defineAsyncComponent, onMounted, ref } from "vue"
+
+import { getCandidates } from "../api"
+
+const Hero = defineAsyncComponent(() => import("../components/Hero.vue"))
 
 const SearchBar = defineAsyncComponent(() =>
   import("../components/filter/SearchBar.vue")
@@ -19,6 +30,12 @@ const SearchBar = defineAsyncComponent(() =>
 const CandidateSlider = defineAsyncComponent(() =>
   import("../components/candidate/CandidateSlider.vue")
 )
+
+const candidates = ref([])
+
+onMounted(async () => {
+  candidates.value = await getCandidates()
+})
 </script>
 
 <style lang="scss" scoped></style>

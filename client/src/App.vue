@@ -3,7 +3,7 @@ import { RouterView } from "vue-router"
 </script>
 
 <template>
-  <div class="mx-auto max-w-md bg-gray-50 min-h-screen">
+  <div class="mx-auto max-w-md bg-[#191A1A] min-h-screen">
     <router-view v-slot="{ Component }">
       <component :is="Component"></component>
     </router-view>

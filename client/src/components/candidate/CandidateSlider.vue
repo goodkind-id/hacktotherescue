@@ -38,7 +38,12 @@ import { defineAsyncComponent } from "vue"
 
 const CandidateCard = defineAsyncComponent(() => import("./CandidateCard.vue"))
 
-import { candidates } from "../../data"
+const props = defineProps({
+  candidates: {
+    type: Array,
+    required: true,
+  },
+})
 </script>
 
 <style lang="scss" scoped>

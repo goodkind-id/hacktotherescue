@@ -4,8 +4,8 @@
       type="search"
       name=""
       id=""
-      class="py-3 px-4 bg-white focus:outline-none border-none shadow block w-full rounded-full"
-      placeholder="Search"
+      class="py-4 px-4 bg-white focus:outline-none border-none shadow block w-full rounded-full"
+      placeholder="Search for issues"
     />
   </div>
 </template>

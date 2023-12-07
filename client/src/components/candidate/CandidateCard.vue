@@ -1,27 +1,29 @@
 <template>
   <router-link
     :to="`/candidate/${slug}`"
-    class="bg-white rounded-lg h-full overflow-hidden relative block"
+    class="rounded-lg h-full overflow-hidden relative block"
   >
     <figure class="flex flex-col h-full">
       <img
         :src="picUrl"
         :alt="name"
         loading="lazy"
-        class="aspect-square object-cover w-full bg-gray-100 grow-0 rounded-lg"
+        class="aspect-square object-cover w-full bg-gray-900 grow-0 rounded-lg"
       />
 
-      <figcaption class="text-center p-2.5 flex flex-col gap-2 h-full">
-        <h5 class="text-sm font-semibold line-clamp-2">{{ name }}</h5>
+      <figcaption class="p-2.5 flex flex-col gap-2 h-full">
+        <h5 class="text-sm font-extrabold line-clamp-1 break-all text-white">
+          {{ name }}
+        </h5>
         <div class="flex flex-col gap-3 mt-auto">
-          <div class="flex items-center gap-1 justify-center">
-            <img :src="party?.logoUrl" :alt="party" class="w-4 h-4" />
-            <p class="text-xs text-gray-500 line-clamp-1 break-all">
-              {{ party.name }}
+          <div class="flex items-center gap-1 text-gray-300">
+            <img :src="party?.logoUrl" :alt="party" class="w-4 h-4 rounded" />
+            <p class="text-xs line-clamp-1 break-all">
+              {{ party.code }}
             </p>
           </div>
           <p
-            class="text-xs w-fit mx-auto bg-yellow-400 text-black py-1 px-2 rounded"
+            class="text-xs w-full text-center bg-[#353838] text-white py-1 px-2 rounded"
           >
             {{ dapil }}
           </p>
