@@ -27,13 +27,15 @@ function _mapForOrama (leader, title) {
     name: leader.NAMA_LENGKAP,
     gender: (leader.JENIS_KELAMIN == 'Perempuan') ? 'f' : 'm',
     title,
-    program: leader?.PROGRAM_USULAN,
-    motivation: leader?.MOTIVASI_CALON,
+    program: leader?.PROGRAM_USULAN?.replace(/¶/g,'\n'),
+    motivation: leader?.MOTIVASI_CALON?.replace(/¶/g,'\n') || leader?.MOTIVASI?.replace(/¶/g,'\n'),
   }
 
   delete leader.NAMA_LENGKAP
   delete leader.JENIS_KELAMIN
   delete leader.PROGRAM_USULAN
+  delete leader.MOTIVASI_CALON
+  delete leader.MOTIVASI
 
   return {
     ...data,
@@ -59,7 +61,7 @@ async function fetchLeaders () {
   const arrayFiles = []
   const arrayLeaders = []
 
-  const folderPath = 'data/JSON/caleg-info/dpr-ri/results'
+  const folderPath = 'data/JSON/caleg-info/dpd/results'
   const folderContent = await _fetchFolder(folderPath)
   folderContent.forEach(file => {
     arrayFiles.push(folderPath + '/' + file)
