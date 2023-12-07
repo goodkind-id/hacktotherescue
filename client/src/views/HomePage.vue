@@ -1,5 +1,8 @@
 <template>
   <div>
+    <h1 class="m-8 text-3xl text-center font-bold">
+      GoodTalk & Action!
+    </h1>
     <SearchBar />
     <CandidateSlider />
   </div>
