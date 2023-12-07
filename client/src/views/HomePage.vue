@@ -1,8 +1,9 @@
 <template>
-  <div>
-    <h1 class="m-8 text-3xl text-center font-bold">
+  <div class="flex flex-col gap-6 py-4">
+    <h1 class="text-3xl text-center font-bold">
       GoodTalk & Action!
     </h1>
+
     <SearchBar />
     <CandidateSlider />
   </div>
@@ -12,11 +13,11 @@
 import { defineAsyncComponent } from "vue"
 
 const SearchBar = defineAsyncComponent(() =>
-  import("../components/SearchBar.vue")
+  import("../components/filter/SearchBar.vue")
 )
 
 const CandidateSlider = defineAsyncComponent(() =>
-  import("../components/CandidateSlider.vue")
+  import("../components/candidate/CandidateSlider.vue")
 )
 </script>
 

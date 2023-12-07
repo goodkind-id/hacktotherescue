@@ -1,13 +1,14 @@
 <template>
   <div>
     <Swiper
-      :slides-per-view="3"
+      :modules="[Pagination, Navigation, Autoplay, EffectFade, EffectCoverflow]"
+      :slides-per-view="2.6"
       :space-between="8"
-      :slides-offset-before="8"
-      :slides-offset-after="8"
+      :slides-offset-before="16"
+      :slides-offset-after="16"
       :pagination="{ clickable: true }"
       :navigation="true"
-      :autoplay="{ delay: 100 }"
+      :autoplay="{ delay: 3000, disableOnInteraction: false }"
       :loop="true"
     >
       <SwiperSlide v-for="item in candidates" :key="item.NAMA_LENGKAP">
@@ -19,13 +20,25 @@
 
 <script setup>
 import { Swiper, SwiperSlide } from "swiper/vue"
+
+import {
+  Pagination,
+  Navigation,
+  Autoplay,
+  EffectFade,
+  EffectCoverflow,
+} from "swiper/modules"
+
 import "swiper/css"
+import "swiper/css/autoplay"
+import "swiper/css/effect-fade"
+import "swiper/css/effect-coverflow"
 
 import { defineAsyncComponent } from "vue"
 
 const CandidateCard = defineAsyncComponent(() => import("./CandidateCard.vue"))
 
-import { candidates } from "../data"
+import { candidates } from "../../data"
 </script>
 
 <style lang="scss" scoped>
