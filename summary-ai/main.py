@@ -24,7 +24,7 @@ tools = [
 ]
 
 
-@app.route('/')
+@app.route('/summary')
 def query_endpoint():
 
     name = request.args.get('name', '')

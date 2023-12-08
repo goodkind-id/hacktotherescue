@@ -7,6 +7,7 @@
       v-model="keyword"
       class="py-4 px-4 bg-white focus:outline-none border-none shadow block w-full rounded-full text-sm font-inter"
       placeholder="Search for issues"
+      ref="searchInput"
       @keyup.enter="search"
     />
   </div>
@@ -18,6 +19,7 @@ import { useRoute, useRouter } from "vue-router"
 
 const emit = defineEmits(["search"])
 
+const searchInput = ref(null)
 const keyword = ref("")
 
 const route = useRoute()
@@ -26,6 +28,8 @@ const router = useRouter()
 function search(e) {
   router.replace({ query: { q: keyword.value } })
   emit("search", keyword.value)
+
+  searchInput.value.blur()
 }
 
 onMounted(() => {

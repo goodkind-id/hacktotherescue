@@ -578,7 +578,7 @@ export const parties = [
       "https://goodkind-bucket04939-dev.s3.ap-southeast-1.amazonaws.com/public/assets/constant/partai/5/Nasdem.svg",
     id: "fe0d776e-aed1-47d9-92c5-381295cc81d7",
     name: "Partai Nasional Demokrat",
-    nameLowerCase: "partai nasional demokrat",
+    nameLowerCase: "partai nasdem",
   },
   {
     info: {
@@ -591,7 +591,7 @@ export const parties = [
       "https://goodkind-bucket04939-dev.s3.ap-southeast-1.amazonaws.com/public/assets/constant/partai/16/Perindo.svg",
     id: "7f5e7376-2983-4eed-bb44-9eb7e016daa2",
     name: "Partai Persatuan Indonesia",
-    nameLowerCase: "partai persatuan indonesia",
+    nameLowerCase: "partai perindo",
   },
   {
     info: {
