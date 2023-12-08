@@ -239,7 +239,7 @@ onMounted(async () => {
 const picUrl = computed(() => {
   // return `https://i.pravatar.cc/150?u=${props.candidate.email}`
 
-  return "https://upload.wikimedia.org/wikipedia/commons/7/72/Default-welcomer.png"
+  return candidate.value?.picUrl
 
   // return "https://thispersondoesnotexist.com?cachebust=" + Math.random()
 })
