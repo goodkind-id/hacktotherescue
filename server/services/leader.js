@@ -79,10 +79,15 @@ async function searchByID (id) {
   const searchResult = await _searchOrama(db, searchParams)
   const resultCount = searchResult.result.hits.length
 
+  let leader = {}
   if (resultCount == 1) {
-    return searchResult.result.hits[0].document
+    leader = searchResult.result.hits[0].document
   } else if (resultCount > 1) {
-    return { message: "Please complete the ID"}
+    return { status: "NOT_FOUND" }
+  }
+
+  if (leader.id != id) {
+    return { status: "NOT_FOUND" }
   }
 
   return {}
