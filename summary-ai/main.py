@@ -1,4 +1,5 @@
 from flask import Flask, request, jsonify
+from flask_cors import CORS
 import os
 import json
 from langchain.utilities import GoogleSerperAPIWrapper
@@ -6,6 +7,7 @@ from langchain.agents import AgentType, Tool, initialize_agent
 from langchain.llms.openai import OpenAI
 
 app = Flask(__name__)
+CORS(app)
 
 os.environ["SERPER_API_KEY"] = ""
 os.environ["OPENAI_API_KEY"] = ""
