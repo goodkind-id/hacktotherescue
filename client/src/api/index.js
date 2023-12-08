@@ -27,3 +27,15 @@ export const getCandidateById = async (id) => {
 
   return result
 }
+
+export const getSummary = async ({ name, issue }) => {
+  if (!name || !issue) return null
+
+  const URL = `http://127.0.0.1:5000/?name=${name}&issue=${issue}`
+
+  const response = await fetch(URL)
+
+  const data = await response.json()
+
+  return data?.result
+}
