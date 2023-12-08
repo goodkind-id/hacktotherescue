@@ -55,22 +55,26 @@ async function _mapAndInsert (leadersResult = [], title) {
   console.log('...Inserted calegs...', title, leaders.length, 'Total:', count)
 }
 
-async function fetchLeaders () {
+async function fetchLeaders (
+  title,
+  folderPath = "data/JSON/caleg-info/dpr-ri/results/",
+  idPrefix = "dpr-ri-"
+) {
   await init()
 
   const arrayFiles = []
   const arrayLeaders = []
 
-  const folderPath = 'data/JSON/caleg-info/dpr-ri/results'
   const folderContent = await _fetchFolder(folderPath)
   folderContent.forEach(file => {
-    arrayFiles.push(folderPath + '/' + file)
+    arrayFiles.push(folderPath + file)
   })
 
   await Promise.all(arrayFiles.map(async (file) => {
     const data = await _fetchData(file)
     try {
-      arrayLeaders.push(data)
+      const idKpu = idPrefix + file.replace(folderPath, '').replace('.json', '')
+      arrayLeaders.push({ id:idKpu, ...data })
     } catch (error) {
       console.error('Error reading or parsing the file:', error.message)
     }
@@ -79,10 +83,15 @@ async function fetchLeaders () {
 
   console.log('Done reading JSON files')
 
-  _mapAndInsert(arrayLeaders, 'Caleg DPR-RI')
+  await _mapAndInsert(arrayLeaders, title)
 
+  console.log('Done populating leaders')
+}
+
+async function populateLeaders () {
+  await fetchLeaders("Caleg DPR-RI", "data/JSON/caleg-info/dpr-ri/results/", )
 }
 
 module.exports = {
-  fetchLeaders,
+  populateLeaders,
 }
