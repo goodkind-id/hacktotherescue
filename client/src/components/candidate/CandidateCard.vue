@@ -1,6 +1,6 @@
 <template>
   <router-link
-    :to="`/candidate/${slug}`"
+    :to="`/candidate/${slug}?issue=${$route?.query?.q}`"
     class="rounded-lg h-full overflow-hidden relative block"
   >
     <figure class="flex flex-col h-full">

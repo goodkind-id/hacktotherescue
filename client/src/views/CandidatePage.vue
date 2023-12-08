@@ -217,9 +217,9 @@
 
 <script setup>
 import { computed, onMounted, ref } from "vue"
-import { candidates, parties } from "../data"
+import { parties } from "../data"
 import { useRoute } from "vue-router"
-import { getCandidateById } from "../api"
+import { getCandidateById, getSummary } from "../api"
 
 const route = useRoute()
 
@@ -227,8 +227,13 @@ const candidate = ref({})
 
 onMounted(async () => {
   const id = route.params.id
+  const issue = route.query.issue
 
   candidate.value = await getCandidateById(id)
+  summary.value = await getSummary({
+    issue,
+    name: candidate.value?.name,
+  })
 })
 
 const picUrl = computed(() => {
@@ -259,10 +264,7 @@ const program = computed(() => {
   return text
 })
 
-const summary = computed(() => {
-  let text = candidate.value?.AI_SUMMARY
-  return text
-})
+const summary = ref("")
 
 const handleShare = () => {
   let shareData = {
