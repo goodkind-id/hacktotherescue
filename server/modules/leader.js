@@ -1,4 +1,4 @@
-const { searchQuery, countDocs } = require('../services/leader')
+const { searchQuery, searchByID, countDocs } = require('../services/leader')
 const { responder } = require('../utils/response')
 
 async function handleGet (req, res) {
@@ -17,7 +17,18 @@ async function handleCount (req, res) {
   responder(res, result)
 }
 
+async function handleGetLeaderDetail (req, res) {
+  const {
+    params: {
+      path
+    }
+  } = req
+  const result = await searchByID(path)
+  responder(res, result)
+}
+
 module.exports.load = app => {
   app.get('/api/leaders', handleGet)
+  app.get('/api/leaders/:path', handleGetLeaderDetail)
   app.get('/api/leaders/_count', handleCount)
 }

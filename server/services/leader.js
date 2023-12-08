@@ -46,7 +46,6 @@ function _embedLeaderDetailsInDocuments(results) {
       ...hit,
       document: {
         ...hit.document,
-        score: hit.score
       }
     }))
   }
@@ -66,6 +65,32 @@ async function _searchOrama (db, searchParams) {
     searchMessage,
     searchStatus
   }
+}
+
+async function searchByID (id) {
+  let properties = ['id']
+
+  const searchParams = {
+    term: id,
+    properties,
+  }
+
+  // run search
+  const searchResult = await _searchOrama(db, searchParams)
+  const resultCount = searchResult.result.hits.length
+
+  let leader = {}
+  if (resultCount == 1) {
+    leader = searchResult.result.hits[0].document
+  } else if (resultCount > 1) {
+    return { status: "NOT_FOUND" }
+  }
+
+  if (leader.id != id) {
+    return { status: "NOT_FOUND" }
+  }
+
+  return {}
 }
 
 async function searchQuery (term = "", queryParams) {
@@ -149,6 +174,7 @@ async function countDocs () {
 
 module.exports = {
   init,
+  searchByID,
   searchQuery,
   insertDocs,
   removeDoc,
