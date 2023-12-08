@@ -79,11 +79,7 @@ const props = defineProps({
 })
 
 const picUrl = computed(() => {
-  // return `https://i.pravatar.cc/150?u=${props.candidate.email}`
-
-  return 'https://upload.wikimedia.org/wikipedia/commons/7/72/Default-welcomer.png'
-
-  // return "https://thispersondoesnotexist.com?cachebust=" + Math.random()
+  return props.candidate?.picUrl || 'https://upload.wikimedia.org/wikipedia/commons/7/72/Default-welcomer.png'
 })
 
 const name = computed(() => {
