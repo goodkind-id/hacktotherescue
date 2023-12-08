@@ -3,7 +3,7 @@
     <Swiper
       :modules="[Pagination, Navigation, Autoplay, EffectFade, EffectCoverflow]"
       :slides-per-view="2.4"
-      :space-between="8"
+      :space-between="16"
       :slides-offset-before="16"
       :slides-offset-after="16"
       :pagination="{ clickable: true }"

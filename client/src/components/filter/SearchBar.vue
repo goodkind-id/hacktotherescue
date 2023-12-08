@@ -4,7 +4,8 @@
       type="search"
       name=""
       id=""
-      class="py-4 px-4 bg-white focus:outline-none border-none shadow block w-full rounded-full"
+      v-model="keyword"
+      class="py-4 px-4 bg-white focus:outline-none border-none shadow block w-full rounded-full text-sm font-inter"
       placeholder="Search for issues"
       @keyup.enter="search"
     />
@@ -12,11 +13,24 @@
 </template>
 
 <script setup>
-  const emit= defineEmits(["search"])
- 
-  function search(e) {
-    emit("search", e.target.value);
-  }
+import { onMounted, ref } from "vue"
+import { useRoute, useRouter } from "vue-router"
+
+const emit = defineEmits(["search"])
+
+const keyword = ref("")
+
+const route = useRoute()
+const router = useRouter()
+
+function search(e) {
+  router.replace({ query: { q: keyword.value } })
+  emit("search", keyword.value)
+}
+
+onMounted(() => {
+  keyword.value = route.query.q || ""
+})
 </script>
 
 <style lang="scss" scoped>
