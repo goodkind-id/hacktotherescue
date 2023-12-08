@@ -1,18 +1,17 @@
+from flask import Flask, request, jsonify
 import os
-import sys
-
-os.environ["SERPER_API_KEY"] = ""
-os.environ["OPENAI_API_KEY"] = ""
-
 from langchain.utilities import GoogleSerperAPIWrapper
 from langchain.agents import AgentType, Tool, initialize_agent
 from langchain.llms.openai import OpenAI
 
-name = "PUTRI ZULKIFLI HASAN"
-issue = "POLUSI UDARA"
+app = Flask(__name__)
+
+os.environ["SERPER_API_KEY"] = ""
+os.environ["OPENAI_API_KEY"] = ""
 
 llm = OpenAI(temperature=0)
 search = GoogleSerperAPIWrapper()
+
 tools = [
     Tool(
         name="Intermediate Answer",
@@ -22,8 +21,20 @@ tools = [
 ]
 
 self_ask_with_search = initialize_agent(
-    tools, llm, agent=AgentType.ZERO_SHOT_REACT_DESCRIPTION, verbose=True
+    tools, llm, agent=AgentType.ZERO_SHOT_REACT_DESCRIPTION
 )
-self_ask_with_search.run(
-    "What is " + name + " stance on " + issue + "?"
-)
+
+@app.route('/')
+def query_endpoint():
+
+    name = request.args.get('name', '')
+    issue = request.args.get('issue', '')
+
+
+    result = self_ask_with_search.run("What is " + name + " stance on " + issue + "?")
+
+
+    return jsonify({"result": result})
+
+if __name__ == '__main__':
+    app.run(debug=True)
