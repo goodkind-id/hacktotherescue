@@ -110,6 +110,41 @@
       </p>
     </div>
 
+    <div v-if="summary">
+      <div class="flex flex-col gap-4 p-4 bg-[#353838] rounded-md">
+        <h5 class="font-montserrat text-gray-100 font-extrabold text-base">
+          AI-Generated Summary
+        </h5>
+
+        <div
+          class="text-gray-100 text-xs font-medium leading-normal font-inter whitespace-pre-line"
+          v-html="summary"
+        ></div>
+      </div>
+    </div>
+
+    <div class="flex flex-col gap-4">
+      <h5 class="font-montserrat text-gray-300 font-extrabold text-base">
+        Motivasi Caleg
+      </h5>
+
+      <div
+        class="text-gray-300 text-xs font-medium leading-normal font-inter whitespace-pre-line"
+        v-html="motivation"
+      ></div>
+    </div>
+
+    <div class="flex flex-col gap-4">
+      <h5 class="font-montserrat text-gray-300 font-extrabold text-base">
+        Program Usulan
+      </h5>
+
+      <div
+        class="text-gray-300 text-xs font-medium leading-normal font-inter whitespace-pre-line"
+        v-html="program"
+      ></div>
+    </div>
+
     <div class="flex flex-col gap-4">
       <h5 class="font-montserrat text-gray-300 font-extrabold text-base">
         Tentang Caleg
@@ -177,28 +212,6 @@
         </div>
       </div>
     </div>
-
-    <div class="flex flex-col gap-4">
-      <h5 class="font-montserrat text-gray-300 font-extrabold text-base">
-        Motivasi Caleg
-      </h5>
-
-      <div
-        class="text-gray-300 text-xs font-medium leading-normal font-inter whitespace-pre-line"
-        v-html="motivation"
-      ></div>
-    </div>
-
-    <div class="flex flex-col gap-4">
-      <h5 class="font-montserrat text-gray-300 font-extrabold text-base">
-        Program Usulan
-      </h5>
-
-      <div
-        class="text-gray-300 text-xs font-medium leading-normal font-inter whitespace-pre-line"
-        v-html="program"
-      ></div>
-    </div>
   </div>
 </template>
 
@@ -221,7 +234,7 @@ onMounted(async () => {
 const picUrl = computed(() => {
   // return `https://i.pravatar.cc/150?u=${props.candidate.email}`
 
-  return 'https://upload.wikimedia.org/wikipedia/commons/7/72/Default-welcomer.png'
+  return "https://upload.wikimedia.org/wikipedia/commons/7/72/Default-welcomer.png"
 
   // return "https://thispersondoesnotexist.com?cachebust=" + Math.random()
 })
@@ -243,6 +256,11 @@ const program = computed(() => {
 
   text = text?.replace(/: $/, "")
 
+  return text
+})
+
+const summary = computed(() => {
+  let text = candidate.value?.AI_SUMMARY
   return text
 })
 
