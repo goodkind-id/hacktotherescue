@@ -82,15 +82,14 @@ async function searchByID (id) {
   let leader = {}
   if (resultCount == 1) {
     leader = searchResult.result.hits[0].document
+    if (leader.id != id) {
+      return { status: "NOT_FOUND" }
+    }
   } else if (resultCount > 1) {
     return { status: "NOT_FOUND" }
   }
 
-  if (leader.id != id) {
-    return { status: "NOT_FOUND" }
-  }
-
-  return {}
+  return leader
 }
 
 async function searchQuery (term = "", queryParams) {
