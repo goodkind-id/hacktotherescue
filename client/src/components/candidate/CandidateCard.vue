@@ -16,7 +16,7 @@
         "
       />
 
-      <figcaption class="p-2.5 flex flex-col gap-2 h-full">
+      <figcaption class="py-2.5 flex flex-col gap-2 h-full">
         <h5
           class="text-sm font-extrabold line-clamp-1 break-all text-white font-montserrat"
         >
@@ -88,7 +88,7 @@ const name = computed(() => {
 
 const party = computed(() => {
   const party = parties.find((party) => {
-    return party?.name === props.candidate?.PARTAI
+    return party?.nameLowerCase === props.candidate?.PARTAI?.toLowerCase()
   })
 
   return party

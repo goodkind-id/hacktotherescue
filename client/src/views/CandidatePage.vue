@@ -287,7 +287,7 @@ const handleShare = () => {
 
 const party = computed(() => {
   const party = parties.find((party) => {
-    return party?.name === candidate.value?.PARTAI
+    return party?.nameLowerCase === candidate?.value.PARTAI?.toLowerCase()
   })
 
   return party
