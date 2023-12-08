@@ -1,5 +1,6 @@
 from flask import Flask, request, jsonify
 import os
+import json
 from langchain.utilities import GoogleSerperAPIWrapper
 from langchain.agents import AgentType, Tool, initialize_agent
 from langchain.llms.openai import OpenAI
@@ -26,12 +27,23 @@ def query_endpoint():
 
     name = request.args.get('name', '')
     issue = request.args.get('issue', '')
-
-    self_ask_with_search = initialize_agent(
-        tools, llm, agent=AgentType.ZERO_SHOT_REACT_DESCRIPTION
-    )
     
-    result = self_ask_with_search.run("What is " + name + " stance on " + issue + "?")
+    if name == "" or issue == "":
+        return jsonify({"result": "Please provide a name and issue"}) 
+    
+    file_path = os.path.join("results", name + ".json")
+    if os.path.exists(file_path):
+        with open(file_path, "r") as f:
+            result = json.loads(f.read())
+    else:
+        self_ask_with_search = initialize_agent(
+            tools, llm, agent=AgentType.ZERO_SHOT_REACT_DESCRIPTION
+        )
+        
+        result = self_ask_with_search.run("What is " + name + " stance on " + issue + "?")
+        
+        with open(file_path, "a+") as f:
+            f.write(json.dumps(result))
 
     return jsonify({"result": result})
 
