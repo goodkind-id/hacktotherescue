@@ -53,7 +53,7 @@
         <span
           class="bg-[#16B366] rounded-full w-6 h-6 font-semibold text-gray-100 text-xs flex items-center justify-center absolute -bottom-1 -right-1"
         >
-          24
+          {{ candidate?.NOMOR_URUT?.trim() }}
         </span>
       </figure>
 
@@ -164,7 +164,7 @@
             </li>
             <li>
               Jenis kelamin:
-              {{ candidate?.gender === "l" ? "Laki-laki" : "Perempuan" }}
+              {{ candidate?.gender === "m" ? "Laki-laki" : "Perempuan" }}
             </li>
             <li>Agama: {{ candidate?.AGAMA }}</li>
             <li>Status disablitas: {{ candidate?.STATUS_DISABILITAS }}</li>

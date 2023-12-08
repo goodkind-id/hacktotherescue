@@ -36,7 +36,7 @@
       <template v-else-if="candidates?.length">
         <div class="flex flex-col gap-4">
           <p
-            class="text-gray-300 font-medium mx-4 text-xs font-inter"
+            class="text-gray-300 font-medium mx-4 text-xl font-inter"
             v-if="route?.query?.q"
           >
             {{ total }} Caleg Bicara
