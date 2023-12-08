@@ -20,9 +20,6 @@ tools = [
     )
 ]
 
-self_ask_with_search = initialize_agent(
-    tools, llm, agent=AgentType.ZERO_SHOT_REACT_DESCRIPTION
-)
 
 @app.route('/')
 def query_endpoint():
@@ -30,9 +27,11 @@ def query_endpoint():
     name = request.args.get('name', '')
     issue = request.args.get('issue', '')
 
-
+    self_ask_with_search = initialize_agent(
+        tools, llm, agent=AgentType.ZERO_SHOT_REACT_DESCRIPTION
+    )
+    
     result = self_ask_with_search.run("What is " + name + " stance on " + issue + "?")
-
 
     return jsonify({"result": result})
 
