@@ -8,7 +8,7 @@ const schema = {
   gender: 'string',
   program: 'string',
   motivation: 'string',
-  AI_SUMMARY: 'string
+  AI_SUMMARY: 'string',
 }
 
 const DEFAULT_PAGE_SIZE = 18
