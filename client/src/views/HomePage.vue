@@ -3,7 +3,7 @@
     <Hero />
 
     <div
-      class="bg-[#272929] pt-6 pb-20 sticky bottom-0 flex flex-col gap-6 mt-auto rounded-t-2xl min-h-[498px]"
+      class="bg-[#272929] pt-6 pb-20 sticky bottom-0 flex flex-col gap-6 mt-auto rounded-t-2xl min-h-[520px]"
     >
       <div class="flex items-center justify-center">
         <button class="w-fit">
@@ -45,10 +45,10 @@
           <CandidateSlider :candidates="candidates" />
         </div>
       </template>
-      <template v-else-if="!candidates?.length && !isLoading">
+      <template v-else-if="!candidates?.length && !isLoading && route?.query?.q">
         <StatusMessage
-          title="Belum Ada Pencarian"
-          message="Cari isu atau nama terlebih dahulu"
+          title="Penelusuran tidak ditemukan"
+          message="Coba kata kunci lain"
           icon="list"
         />
       </template>
