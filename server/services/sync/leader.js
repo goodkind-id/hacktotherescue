@@ -1,6 +1,8 @@
 const fs = require('fs')
 const { init, insertDocs, countDocs } = require('../leader')
 
+const leaderImage = {}
+
 async function _fetchData(filePath) {
   // console.log('fetching file: ', filePath)
   try {
@@ -10,6 +12,7 @@ async function _fetchData(filePath) {
   } catch (error) {
     console.error('Error reading or parsing the file:', error.message)
   }
+  
 }
 
 async function _fetchFolder(folderPath) {
@@ -23,12 +26,16 @@ async function _fetchFolder(folderPath) {
 }
 
 function _mapForOrama (leader, title) {
+  const idPrefix = "dpr-ri-"
+
   const data = {
+    id: idPrefix + leader.idKpu,
     name: leader.NAMA_LENGKAP,
     gender: (leader.JENIS_KELAMIN == 'Perempuan') ? 'f' : 'm',
     title,
     program: leader?.PROGRAM_USULAN?.replace(/¶/g,'\n'),
     motivation: leader?.MOTIVASI_CALON?.replace(/¶/g,'\n') || leader?.MOTIVASI?.replace(/¶/g,'\n'),
+    picUrl: leaderImage[leader.idKpu],
   }
 
   delete leader.NAMA_LENGKAP
@@ -57,8 +64,7 @@ async function _mapAndInsert (leadersResult = [], title) {
 
 async function fetchLeaders (
   title,
-  folderPath = "data/JSON/caleg-info/dpr-ri/results/",
-  idPrefix = "dpr-ri-"
+  folderPath = "data/JSON/caleg-info/dpr-ri/results/"
 ) {
   await init()
 
@@ -73,8 +79,8 @@ async function fetchLeaders (
   await Promise.all(arrayFiles.map(async (file) => {
     const data = await _fetchData(file)
     try {
-      const idKpu = idPrefix + file.replace(folderPath, '').replace('.json', '')
-      arrayLeaders.push({ id:idKpu, ...data })
+      const idKpu = file.replace(folderPath, '').replace('.json', '')
+      arrayLeaders.push({ idKpu, ...data })
     } catch (error) {
       console.error('Error reading or parsing the file:', error.message)
     }
@@ -89,7 +95,23 @@ async function fetchLeaders (
 }
 
 async function populateLeaders () {
-  await fetchLeaders("Caleg DPR-RI", "data/JSON/caleg-info/dpr-ri/results/", )
+  const imageFile = await _fetchData("data/caleg_dpr.json")
+
+  // map image file into key value pair
+  let noCounter = 0
+  await Promise.all(
+    imageFile.map(item => {
+      let idKpu = item.info.id_kpu
+      if (idKpu == undefined || idKpu == null || idKpu == '') {
+        noCounter++
+      }
+
+      leaderImage[idKpu] = item.picUrl
+    })
+  )
+  console.log('image without id kpu:', noCounter)
+
+  await fetchLeaders("Caleg DPR-RI", "data/JSON/caleg-info/dpr-ri/results/")
 }
 
 module.exports = {
