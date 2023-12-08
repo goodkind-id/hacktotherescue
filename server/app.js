@@ -2,7 +2,7 @@ const express = require('express')
 const app = express()
 const port = 3000
 
-const { fetchLeaders } = require('./services/sync/leader')
+const { populateLeaders } = require('./services/sync/leader')
 
 app.use(express.json())
 
@@ -12,7 +12,7 @@ const modules = [
 
 modules.forEach(m => m.load(app))
 
-fetchLeaders()
+populateLeaders()
 
 app.listen(port, () => {
   console.log(`Goodkind Hacktotherescue service listening on port ${port}`)
