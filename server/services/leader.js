@@ -59,7 +59,7 @@ async function _searchOrama (db, searchParams) {
   // run search
   result = await search(db, searchParams)
 
-  // printMemoryUsage()
+  printMemoryUsage()
 
   return {
     result,

@@ -12,7 +12,7 @@ async function _fetchData(filePath) {
   } catch (error) {
     console.error('Error reading or parsing the file:', error.message)
   }
-  
+
 }
 
 async function _fetchFolder(folderPath) {
@@ -94,7 +94,7 @@ async function fetchLeaders (
   console.log('Done populating leaders')
 }
 
-async function populateLeaders () {
+async function _countImageWithoutIdKpu () {
   const imageFile = await _fetchData("data/caleg_dpr.json")
 
   // map image file into key value pair
@@ -105,13 +105,17 @@ async function populateLeaders () {
       if (idKpu == undefined || idKpu == null || idKpu == '') {
         noCounter++
       }
-
-      leaderImage[idKpu] = item.picUrl
     })
   )
   console.log('image without id kpu:', noCounter)
+}
+
+async function populateLeaders () {
+  await _countImageWithoutIdKpu()
 
   await fetchLeaders("Caleg DPR-RI", "data/JSON/caleg-info/dpr-ri/results/")
+  await fetchLeaders("Caleg DPR-RI", "data/JSON/caleg-info/dprd-prov/results/")
+  await fetchLeaders("Caleg DPR-RI", "data/JSON/caleg-info/dprd-kota/results/")
 }
 
 module.exports = {
