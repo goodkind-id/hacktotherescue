@@ -16,7 +16,7 @@ async function _fetchData(filePath) {
 }
 
 async function _fetchFolder(folderPath) {
-  console.log('fetching folder: ', folderPath)
+  console.log('Reading folder:', folderPath)
   try {
     const data = fs.readdirSync(folderPath)
     return data
@@ -66,11 +66,10 @@ async function fetchLeaders (
   title,
   folderPath = "data/JSON/caleg-info/dpr-ri/results/"
 ) {
-  await init()
-
   const arrayFiles = []
   const arrayLeaders = []
 
+  console.log('-----------------', title, '-----------------')
   const folderContent = await _fetchFolder(folderPath)
   folderContent.forEach(file => {
     arrayFiles.push(folderPath + file)
@@ -87,11 +86,9 @@ async function fetchLeaders (
     return data
   }))
 
-  console.log('Done reading JSON files')
+  console.log('Processing', title, 'JSON files')
 
   await _mapAndInsert(arrayLeaders, title)
-
-  console.log('Done populating leaders')
 }
 
 async function _countImageWithoutIdKpu () {
@@ -111,11 +108,13 @@ async function _countImageWithoutIdKpu () {
 }
 
 async function populateLeaders () {
+  await init()
+
   await _countImageWithoutIdKpu()
 
   await fetchLeaders("Caleg DPR-RI", "data/JSON/caleg-info/dpr-ri/results/")
-  await fetchLeaders("Caleg DPR-RI", "data/JSON/caleg-info/dprd-prov/results/")
-  await fetchLeaders("Caleg DPR-RI", "data/JSON/caleg-info/dprd-kota/results/")
+  await fetchLeaders("Caleg DPRD-Prov", "data/JSON/caleg-info/dprd-prov/results/")
+  await fetchLeaders("Caleg DPRD-Kota", "data/JSON/caleg-info/dprd-kota/results/")
 }
 
 module.exports = {
