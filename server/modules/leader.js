@@ -29,6 +29,6 @@ async function handleGetLeaderDetail (req, res) {
 
 module.exports.load = app => {
   app.get('/api/leaders', handleGet)
-  app.get('/api/leaders/:path', handleGetLeaderDetail)
   app.get('/api/leaders/_count', handleCount)
+  app.get('/api/leaders/:path', handleGetLeaderDetail)
 }
