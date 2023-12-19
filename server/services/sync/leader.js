@@ -26,10 +26,10 @@ async function _fetchFolder(folderPath) {
 }
 
 function _mapForOrama (leader, title) {
-  const idPrefix = "dpr-ri-"
+  const idPrefix = title.toLowerCase().replace(/ /g, '-').replace('caleg-', '')
 
   const data = {
-    id: idPrefix + leader.idKpu,
+    id: idPrefix + '-' + leader.idKpu,
     name: leader.NAMA_LENGKAP,
     gender: (leader.JENIS_KELAMIN == 'Perempuan') ? 'f' : 'm',
     title,
@@ -112,9 +112,10 @@ async function populateLeaders () {
 
   await _countImageWithoutIdKpu()
 
+  await fetchLeaders("Caleg DPD", "data/JSON/caleg-info/dpd/results/")
   await fetchLeaders("Caleg DPR-RI", "data/JSON/caleg-info/dpr-ri/results/")
-  await fetchLeaders("Caleg DPRD-Prov", "data/JSON/caleg-info/dprd-prov/results/")
-  await fetchLeaders("Caleg DPRD-Kota", "data/JSON/caleg-info/dprd-kota/results/")
+  // await fetchLeaders("Caleg DPRD-Prov", "data/JSON/caleg-info/dprd-prov/results/")
+  // await fetchLeaders("Caleg DPRD-Kota", "data/JSON/caleg-info/dprd-kota/results/")
 }
 
 module.exports = {
